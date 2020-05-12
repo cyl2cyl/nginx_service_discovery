@@ -6,7 +6,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
-@SpringBootApplication
+@SpringBootApplication()
 @EnableDiscoveryClient
 public class Application {
 

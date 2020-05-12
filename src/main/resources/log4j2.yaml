@@ -6,7 +6,7 @@ Configuration:
       name: console
       target: SYSTEM_OUT
       PatternLayout:
-        Pattern: "%d{MM-dd HH:mm:ss.SSS} [%5p] [%40.40c{1.}:%3L] - %m%n"
+        Pattern: "%highlight{%d{MM-dd HH:mm:ss.SSS} [%5p] [%40.40c{1.}:%3L] - %m%n}{FATAL=white, ERROR=red, WARN=blue, INFO=Green, DEBUG=Yellow, TRACE=blue}"
     RollingRandomAccessFile:
       - name: daily_info
         Filters:
@@ -74,6 +74,7 @@ Configuration:
     Root:
       level: info
       appender-ref:
+        - ref: console
         - ref: daily_info
         - ref: daily_warn
         - ref: daily_error

@@ -1,4 +1,4 @@
-package com.xm.service.discovery.pojo;
+package com.xm.service.discovery.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -17,7 +17,7 @@ import java.util.Set;
 @ConfigurationProperties(prefix = "upstream")
 public class UpstreamConfig {
 
-    private Set<DiscoverConfigBO> lists;
+    private Set<DiscoverConfig> lists;
 
 
 }
