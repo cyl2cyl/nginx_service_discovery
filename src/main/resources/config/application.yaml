@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: nginx_service_discovery
+  profiles:
+    active: dev
+nginx:
+  cmdPath: xxx/tengine/sbin/nginx
+  configPath: xxx/javaSoft/tengine/conf/nginx.conf
+  reload:
+    interval: 1000
+# 服务列表 upstreamName 为nginx负载均衡上面的配置，serviceName为nacos上面的配置
+upstream:
+  lists:
+    - upstreamName: example_service
+      serviceName: example_service
