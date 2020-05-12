@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: service_discovery
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 139.196.88.129:8848
+        namespace: 0e12cb44-0a5c-4fb2-a9dd-45f39a3b38f4
+        file-extension: yaml
+      discovery:
+        server-addr: 139.196.88.129:8848
+        namespace: 038a263f-bf7d-4b18-a11e-db8d7021b667

@@ -1,0 +1,79 @@
+Configuration:
+  status: warn
+  monitorInterval: 60
+  appenders:
+    Console:
+      name: console
+      target: SYSTEM_OUT
+      PatternLayout:
+        Pattern: "%d{MM-dd HH:mm:ss.SSS} [%5p] [%40.40c{1.}:%3L] - %m%n"
+    RollingRandomAccessFile:
+      - name: daily_info
+        Filters:
+          ThresholdFilter:
+            - level: warn
+              onMatch: DENY
+              onMismatch: NEUTRAL
+            - level: info
+              onMatch: ACCEPT
+              onMismatch: DENY
+        immediateFlush: true
+        bufferSize: 2621440
+        fileName: /logs/info.log
+        filePattern: /logs/info.log.%d{yyyy-MM-dd}.zip
+        PatternLayout:
+          Pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} Thread_%t_%tid %-5level %class{36} %L %M -- %msg%xEx%n"
+        Policies:
+          TimeBasedTriggeringPolicy:
+            modulate: true
+            interval: 1
+        DefaultRolloverStrategy:
+          Delete:
+            basePath: /logs/
+            maxDepth: 1
+            IfFileName:
+              glob: "*.zip"
+            IfLastModified:
+              age: 15d
+      - name: daily_warn
+        Filters:
+          ThresholdFilter:
+            - level: error
+              onMatch: DENY
+              onMismatch: NEUTRAL
+            - level: warn
+              onMatch: ACCEPT
+              onMismatch: DENY
+        immediateFlush: true
+        bufferSize: 2621440
+        fileName: /logs/warn.log
+        filePattern: /logs/warn.log.%d{yyyy-MM-dd}.zip
+        PatternLayout:
+          Pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} Thread_%t_%tid %-5level %class{36} %L %M -- %msg%xEx%n"
+        Policies:
+          TimeBasedTriggeringPolicy:
+            modulate: true
+            interval: 1
+      - name: daily_error
+        Filters:
+          ThresholdFilter:
+            level: error
+            onMatch: ACCEPT
+            onMismatch: DENY
+        immediateFlush: true
+        bufferSize: 2621440
+        fileName: /logs/error.log
+        filePattern: /logs/error.log.%d{yyyy-MM-dd}.zip
+        PatternLayout:
+          Pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} Thread_%t_%tid %-5level %class{36} %L %M -- %msg%xEx%n"
+        Policies:
+          TimeBasedTriggeringPolicy:
+            modulate: true
+            interval: 1
+  Loggers:
+    Root:
+      level: info
+      appender-ref:
+        - ref: daily_info
+        - ref: daily_warn
+        - ref: daily_error
